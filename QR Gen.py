@@ -25,17 +25,17 @@ def genQR():
 
     qrcode = segno.make_qr(str(serial))
     qrcode.save(
-        "current.png",
+        "images/current.png",
         scale=10,
         border=2,
     )
 
-    img = Image.open("current.png")
+    img = Image.open("images/current.png")
     bg = Image.new("RGB", (580, 290), (255, 255, 255))
 
     bg.paste(img, (0, 0))
-    bg.save("combined.png")
-    bg = Image.open("combined.png")
+    bg.save("images/combined.png")
+    bg = Image.open("images/combined.png")
 
     draw = ImageDraw.Draw(bg)
     fontTop = ImageFont.truetype("arial.ttf", 122)
@@ -44,9 +44,9 @@ def genQR():
     draw.text((275, 75), textTop, fill="black", font=fontTop)
     draw.text((25, 250), textBottom, fill="black", font=fontBottom)
 
-    bg.save("combined.png")
+    bg.save("images/combined.png")
 
-    os.system(f'start /min "" "combined.png" /print')
+    os.system(f'start /min "" "images/combined.png" /print')
 
     # Get the data from the forms
     data1 = builder.get()
@@ -54,23 +54,24 @@ def genQR():
     data3 = supplier.get()
     data4 = capacity.get()
     data5 = job.get()
+    data6 = neey.get()
 
     cell_serials = []
-    with open('cellserials.csv', 'r') as file:
+    with open('data/cellserials.csv', 'r') as file:
         reader = csv.reader(file)
         for row in reader:
             cell_serials.append(row[0])
 
     # Write the data to a file
-    with open('data.csv', 'a') as file:
-        file.write(f'{serial},{data1},{data2},{data3},{data4},{cell_serials},{now},{data5}\n')
+    with open('data/data.csv', 'a') as file:
+        file.write(f'{serial},{data1},{data2},{data3},{data4},{cell_serials},{now},{data5},{data6}\n')
 
     # Continue with the existing code...
 
 def refresh():
     # Read the CSV file
     cell_serials = []
-    with open('cellserials.csv', 'r') as file:
+    with open('data/cellserials.csv', 'r') as file:
         reader = csv.reader(file)
         for row in reader:
             cell_serials.append(row[0])  # Change this if the serial number is not in the first column
@@ -84,7 +85,7 @@ def refresh():
 cell_serials = []
 
 # Open the CSV file
-with open('C:/Users/owner/Desktop/qr/cellSerials.csv', 'r') as file:
+with open('data/cellSerials.csv', 'r') as file:
     # Create a CSV reader
     reader = csv.reader(file)
 

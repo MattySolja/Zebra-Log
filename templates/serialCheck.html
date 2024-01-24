@@ -3,7 +3,7 @@
 <head>
     <title>Serial Checker</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-</head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}"></head>
 <body>
     <h1>Serial Checker</h1>
     <form action="/checkvalue" method="POST" autocapitalize="off" autocomplete="off">
@@ -18,6 +18,7 @@
     <p>Supplier: {{ supplier }}</p>
     <p>Capacity: {{ capacity }}</p>
     <p>Reference: {{ reference }}</p>
+    <p>Neey: {{ neey }}</p>
     <p></p>
     <button onclick="window.location.href='/'">Main menu</button>
 </body>
