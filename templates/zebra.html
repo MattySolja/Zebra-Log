@@ -6,11 +6,12 @@
 </head>
 <body>
     <h1>Scan Cell {{ cell_number }}</h1>
-    <form action="http://192.168.0.173:5000/endpoint" method="post" autocomplete="off">
+    <form action="/endpoint" method="post" autocomplete="off">
         <label for="textEntry">Cell serial:</label>
         <input type="text" id="textEntry" name="textEntry" autofocus>
-        <br>
         <input type="submit" value="Submit">
     </form>
+    <p></p>
+    <button onclick="window.location.href='/'">Main menu</button>
 </body>
 </html>

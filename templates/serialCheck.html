@@ -1,16 +1,24 @@
-<!-- FILEPATH: Untitled-1 -->
-
 <!DOCTYPE html>
 <html>
 <head>
-    <title>CSV Value Checker</title>
+    <title>Serial Checker</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
-    <h1>CSV Value Checker</h1>
-    <form action="/check_value" method="POST">
+    <h1>Serial Checker</h1>
+    <form action="/checkvalue" method="POST" autocapitalize="off" autocomplete="off">
         <label for="value">Enter a value:</label>
-        <input type="text" id="value" name="value" required>
+        <input type="text" id="value" name="value" autofocus>
         <button type="submit">Check</button>
     </form>
+    <p>Found? {{ message }}</p>
+    <p>Builder: {{ builder }}</p>
+    <p>Model: {{ model }}</p>
+    <p>Date: {{ date }}</p>
+    <p>Supplier: {{ supplier }}</p>
+    <p>Capacity: {{ capacity }}</p>
+    <p>Reference: {{ reference }}</p>
+    <p></p>
+    <button onclick="window.location.href='/'">Main menu</button>
 </body>
 </html>
