@@ -3,11 +3,14 @@
 <head>
     <title>Menus</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}"></head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='static/styles/style.css') }}"></head>
 <body>
-    <h1>Menu</h1>
-    <ul>
-        <li><a href="/valueChecker">Serial Checker</a></li>
-        <li><a href="/zebra">Cell Scanner</a></li>
+    <div class="main">
+        <h1>Menu</h1>
+        <ul>
+            <li><a href="/valueChecker">Serial Checker</a></li>
+            <li><a href="/zebra">Cell Scanner</a></li>
+        </ul>
+    </div>
 </body>
 </html>
