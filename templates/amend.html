@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Grid with Text Inputs</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <style>
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            grid-template-rows: repeat(8, 1fr);
+            grid-template-areas: 
+                "cell8 cell9"
+                "cell7 cell10"
+                "cell6 cell11"
+                "cell5 cell12"
+                "cell4 cell13"
+                "cell3 cell14"
+                "cell2 cell15"
+                "cell1 cell16";
+            grid-gap: 10px;
+            padding: 10px;
+            min-width: 500px;
+            grid-auto-flow: row;
+        }
+
+        .grid > div {
+            min-width: 0;
+        }
+        .cell1 { grid-area: cell1; }
+        .cell2 { grid-area: cell2; }
+        .cell3 { grid-area: cell3; }
+        .cell4 { grid-area: cell4; }
+        .cell5 { grid-area: cell5; }
+        .cell6 { grid-area: cell6; }
+        .cell7 { grid-area: cell7; }
+        .cell8 { grid-area: cell8; }
+        .cell9 { grid-area: cell9; }
+        .cell10 { grid-area: cell10; }
+        .cell11 { grid-area: cell11; }
+        .cell12 { grid-area: cell12; }
+        .cell13 { grid-area: cell13; }
+        .cell14 { grid-area: cell14; }
+        .cell15 { grid-area: cell15; }
+        .cell16 { grid-area: cell16; }
+    </style>
+    <div class="grid">
+        <div class="cell1">Cell 1  <span>{{ cell1 }}</span></div>
+        <div class="cell2">Cell 2  <span>{{ cell2 }}</span></div>
+        <div class="cell3">Cell 3  <span>{{ cell3 }}</span></div>
+        <div class="cell4">Cell 4  <span>{{ cell4 }}</span></div>
+        <div class="cell5">Cell 5  <span>{{ cell5 }}</span></div>
+        <div class="cell6">Cell 6  <span>{{ cell6 }}</span></div>
+        <div class="cell7">Cell 7  <span>{{ cell7 }}</span></div>
+        <div class="cell8">Cell 8  <span>{{ cell8 }}</span></div>
+        <div class="cell9">Cell 9  <span>{{ cell9 }}</span></div>
+        <div class="cell10">Cell 10 <span>{{ cell10 }}</span></div>
+        <div class="cell11">Cell 11 <span>{{ cell11 }}</span></div>
+        <div class="cell12">Cell 12 <span>{{ cell12 }}</span></div>
+        <div class="cell13">Cell 13 <span>{{ cell13 }}</span></div>
+        <div class="cell14">Cell 14 <span>{{ cell14 }}</span></div>
+        <div class="cell15">Cell 15 <span>{{ cell15 }}</span></div>
+        <div class="cell16">Cell 16 <span>{{ cell16 }}</span></div>
+    </div>
+<form action="/submit" method="post">
+    <input type="submit" value="Submit">
+</form>
+<form action="/restart" method="post">
+    <input type="submit" value="Restart">
+</form>
+</body>
+</html>
