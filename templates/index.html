@@ -1,16 +1,28 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Menus</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="{{ url_for('static', filename='static/styles/style.css') }}"></head>
+    <title>Text Input</title>
+    <style>
+        /* Make the text box bigger */
+        #text-input {
+            font-size: 20px; /* Increase the font size */
+            width: 100%; /* Make the text box take up the full width of its container */
+            box-sizing: border-box; /* Make sure the width includes padding and border */
+            padding: 10px; /* Add some padding */
+        }
+
+        /* Make the form mobile friendly */
+        @media (max-width: 600px) {
+            #text-input {
+                font-size: 16px; /* Decrease the font size for small screens */
+            }
+        }
+    </style>
+</head>
 <body>
-    <div class="main">
-        <h1>Menu</h1>
-        <ul>
-            <li><a href="/valueChecker">Serial Checker</a></li>
-            <li><a href="/zebra">Cell Scanner</a></li>
-        </ul>
-    </div>
+    <form action="/type" method="POST">
+        <input type="text" name="text" id="text-input" autofocus>
+        <button type="submit">Send</button>
+    </form>
 </body>
 </html>

@@ -76,6 +76,15 @@ def save_to_database():
         "INSERT OR REPLACE INTO serial_numbers (serial_number, Builder, Build_Date, Model, Supplier, Capacity, Job, Neey) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
         (serial_number, Builder, Build_Date, Model, Supplier, Capacity, Job, Neey),
     )
+
+    # Save cell serial numbers
+    for cell_position, entry_widget in cell_position_to_grid_element.items():
+        cell_serial_number = entry_widget.get()
+        c.execute(
+            "INSERT OR REPLACE INTO cell_serial_numbers (assigned_battery, cell_position, cell_serial_number) VALUES (?, ?, ?)",
+            (serial_number, cell_position, cell_serial_number),
+        )
+
     conn.commit()
 
 
@@ -104,19 +113,18 @@ def display_properties(serial_number):
         Neey_entry.insert(0, Neey)
 
     c.execute(
-        "SELECT assigned_battery, cell_position FROM cell_serial_numbers WHERE cell_serial_number = ?",
+        "SELECT cell_serial_number, cell_position FROM cell_serial_numbers WHERE assigned_battery = ?",
         (serial_number,),
     )
     rows = c.fetchall()
     if rows is not None:
         for row in rows:
-            assigned_battery, cell_position = row
             # Assuming you have a dictionary that maps cell positions to grid elements
+            cell_serial_number = row[0]
+            cell_position = int(row[1])
             grid_element = cell_position_to_grid_element[cell_position]
             grid_element.delete(0, "end")
-            grid_element.insert(0, assigned_battery)
-            print(assigned_battery, cell_position)
-
+            grid_element.insert(0, cell_serial_number)
 
 def genQRCode(serial):
     qrcode = segno.make_qr(str(serial))
@@ -170,6 +178,7 @@ root = tk.Tk()
 frame = tk.Frame(root)
 frame.grid()
 
+root.title("Serial Number Generator")
 
 outer_frame = tk.Frame(root, width=1200, height=500)
 outer_frame.place(relx=0.5, rely=0.5, anchor="center")
@@ -242,6 +251,10 @@ generate_qr_button = tk.Button(
 )
 generate_qr_button.pack(padx=10, pady=10)
 
+Repeat_label = tk.Label(button_frame, text="Repeat:").pack()
+Repeat_entry = tk.Entry(button_frame)
+Repeat_entry.pack()
+
 generate_qr_button_batch = tk.Button(
     button_frame,
     text="Generate Batch QR Code",
@@ -251,21 +264,21 @@ generate_qr_button_batch.pack(padx=10, pady=10)
 
 image = tk.PhotoImage(file="images/current.png")
 image_label = tk.Label(root, image=image)
-image_label.pack()
+image_label.pack(pady=10)
 
 # -----------------Cell Serials-----------------#
 
 cell_position_to_grid_element = {}
 
 for i in range(1, 9):
-    cell_position_to_grid_element[f"Cell {i}"] = tk.Entry(cell_frame)
-    cell_position_to_grid_element[f"Cell {i}"].grid(row=i - 1, column=3)
-    cell_position_to_grid_element[f"Cell {i}"].insert(0, f"Cell {i}")
+    cell_position_to_grid_element[i] = tk.Entry(cell_frame)
+    cell_position_to_grid_element[i].grid(row=i - 1, column=3)
+    cell_position_to_grid_element[i].insert(0, f"Cell {i}")
 
 for i in range(9, 17):
-    cell_position_to_grid_element[f"Cell {i}"] = tk.Entry(cell_frame)
-    cell_position_to_grid_element[f"Cell {i}"].grid(row=i - 9, column=4)
-    cell_position_to_grid_element[f"Cell {i}"].insert(0, f"Cell {i}")
+    cell_position_to_grid_element[i] = tk.Entry(cell_frame)
+    cell_position_to_grid_element[i].grid(row=i - 9, column=4)
+    cell_position_to_grid_element[i].insert(0, f"Cell {i}")
 
 
 def toggle_fullscreen(event=None):

@@ -20,16 +20,19 @@ def write_to_database():
 
     # Clear the cell_serial_entry field
     cell_serial_entry.delete(0, tk.END)
-    cell_position_entry.delete(0, tk.END)
-    cell_position_entry.insert(0, int(cell_position) + 1)
-    if int(cell_position) > 15:
+    if cell_position_entry.get() == int or cell_position_entry.get() == float:
         cell_position_entry.delete(0, tk.END)
-        cell_position_entry.insert(0, 1)
+        cell_position_entry.insert(0, int(cell_position) + 1)
+        if int(cell_position) > 15:
+            cell_position_entry.delete(0, tk.END)
+            cell_position_entry.insert(0, 1)
+    
 
 
 # Create the Tkinter window
 window = tk.Tk()
 window.title("Serial Number Writer")
+window.geometry("200x200")
 
 cell_serial_label = tk.Label(window, text="Cell Serial Number:")
 cell_serial_label.pack()
