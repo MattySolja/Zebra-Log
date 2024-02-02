@@ -20,12 +20,11 @@ def write_to_database():
 
     # Clear the cell_serial_entry field
     cell_serial_entry.delete(0, tk.END)
-    if cell_position_entry.get() == int or cell_position_entry.get() == float:
+    cell_position_entry.delete(0, tk.END)
+    cell_position_entry.insert(0, int(cell_position) + 1)
+    if int(cell_position) > 15:
         cell_position_entry.delete(0, tk.END)
-        cell_position_entry.insert(0, int(cell_position) + 1)
-        if int(cell_position) > 15:
-            cell_position_entry.delete(0, tk.END)
-            cell_position_entry.insert(0, 1)
+        cell_position_entry.insert(0, 1)
     
 
 
